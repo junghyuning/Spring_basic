@@ -6,14 +6,14 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Scanner;
 import java.util.Set;
-
+//### 컨트롤러를 직접 생성하기
 public class MethodCall {
 	public static void main(String[] args) throws Exception{
 		HashMap map = new HashMap();  //메인메서드에서 맵 생성함 
 		System.out.println("before:"+map);
 		
 		
-		//### 해당 예제는 컨트롤러를 직접 생성 후 호출
+		//### 컨트롤러를 직접 생성 후 호출
 		ModelController mc = new ModelController();  
 		String viewName = mc.main(map); //컨트롤러 생성 후, map 호출(매개변수로 넘겨 줌) -> view 이름 반환
 		//(즉, 컨트롤러는 map관련 정보를 main에 줄 필요 없음(애초에 main메서드가 가지고있는 정보임)

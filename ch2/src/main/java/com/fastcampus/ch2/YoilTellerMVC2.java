@@ -17,14 +17,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 //연월일 입력 -> 요일을 알려주는 프로그램
 //1. 일요일 2. 월요일 ...
 @Controller
-public class YoilTellerMVC { //http://localhost/ch2/getYoilMVC?year=2021&month=10&day=1 
+public class YoilTellerMVC2 { //http://localhost/ch2/getYoilMVC?year=2021&month=10&day=1 
 	@ExceptionHandler
 	public String catcher(Exception ex) {
 		ex.printStackTrace();
 		return "yoilError";
 	}
 	
-	@RequestMapping("/getYoilMVC")
+	@RequestMapping("/getYoilMVC2")
 //	public static void main(HttpServletRequest request, HttpServletResponse response) throws IOException {
 	//MVC_1. 입력부의 분리
 //	public static void main(String year, String month, String month, HttpServletResponse response) throws IOException {

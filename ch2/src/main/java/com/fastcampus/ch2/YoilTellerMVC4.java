@@ -17,32 +17,25 @@ import org.springframework.web.bind.annotation.RequestParam;
 //연월일 입력 -> 요일을 알려주는 프로그램
 //1. 일요일 2. 월요일 ...
 @Controller
-public class YoilTellerMVC { //http://localhost/ch2/getYoilMVC?year=2021&month=10&day=1 
+public class YoilTellerMVC4 { //http://localhost/ch2/getYoilMVC?year=2021&month=10&day=1 
 	@ExceptionHandler
 	public String catcher(Exception ex) {
 		ex.printStackTrace();
 		return "yoilError";
 	}
 	
-	@RequestMapping("/getYoilMVC")
-//	public static void main(HttpServletRequest request, HttpServletResponse response) throws IOException {
-	//MVC_1. 입력부의 분리
-//	public static void main(String year, String month, String month, HttpServletResponse response) throws IOException {
-	//MVC_2. 자동 형변환 (디스패처 서블릿) 
-	public static String main(@RequestParam(required = true) int year, 
-			@RequestParam(required = true) int month, 
-			@RequestParam(required = true) int day, Model model) throws IOException {
+	@RequestMapping("/getYoilMVC4")
+	//year,month,day -> Mydate클래스로 정의하여 하나의 매개변수로 사용
+	public static String main(MyDate date, Model model) throws IOException {
 		
 		
 		//필요한 부분 1. 유효성검사
-		if(!isValid(year,month,day))
+		if(!isValid(date))
 			return "yoilError";
 		
-		char yoil = getYoil(year, month, day);
+		char yoil = getYoil(date);
 		
-		model.addAttribute("year", year);
-		model.addAttribute("month", month);
-		model.addAttribute("day", day);
+		model.addAttribute("myDate", date);
 		model.addAttribute("yoil", yoil);
 		
 
@@ -52,6 +45,16 @@ public class YoilTellerMVC { //http://localhost/ch2/getYoilMVC?year=2021&month=1
 	}
 
 	
+private static boolean isValid(MyDate date) {
+		// TODO Auto-generated method stub
+		return isValid(date.getYear(), date.getMonth(), date.getDay());
+	}
+
+private static char getYoil(MyDate date) {
+		// TODO Auto-generated method stub
+		return getYoil(date.getYear(), date.getMonth(), date.getDay());
+	}
+
 private static boolean isValid(int year, int month, int day) {
 	// TODO Auto-generated method stub
 	return true;
