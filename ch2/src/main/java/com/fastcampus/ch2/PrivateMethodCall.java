@@ -7,16 +7,16 @@ public class PrivateMethodCall {
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 //		Hello hello = new Hello();
-//		hello.main(); // private ÀÌ¹Ç·Î ¿ÜºÎ È£ÃâÀÌ ºÒ°¡ÇÔ.
-		// ¾Æ±î´Â Reflection API¸¦ »ç¿ëÇÑ °Í -> Å¬·¡½º Á¤º¸¸¦ ¾ò°í ´Ù·ê ¼ö ÀÖ´Â °­·ÂÇÑ ±â´ÉÀ» Á¦°øÇÏ´Â api
-		//java.lang.reflect ÆĞÅ°Áö¸¦ Á¦°ø ÇÔ.
-		//HelloÅ¬·¡½ºÀÇ Class °´Ã¼(Å¬·¡½ºÀÇ Á¤º¸¸¦ ´ã°íÀÖ´Â °´Ã¼)¸¦ ¾ò¾î¿È.
+//		hello.main(); // private ì´ë¯€ë¡œ ì™¸ë¶€ í˜¸ì¶œì´ ë¶ˆê°€í•¨.
+		// ì•„ê¹ŒëŠ” Reflection APIë¥¼ ì‚¬ìš©í•œ ê²ƒ -> í´ë˜ìŠ¤ ì •ë³´ë¥¼ ì–»ê³  ë‹¤ë£° ìˆ˜ ìˆëŠ” ê°•ë ¥í•œ ê¸°ëŠ¥ì„ ì œê³µí•˜ëŠ” api
+		//java.lang.reflect íŒ¨í‚¤ì§€ë¥¼ ì œê³µ í•¨.
+		//Helloí´ë˜ìŠ¤ì˜ Class ê°ì²´(í´ë˜ìŠ¤ì˜ ì •ë³´ë¥¼ ë‹´ê³ ìˆëŠ” ê°ì²´)ë¥¼ ì–»ì–´ì˜´.
 		Class helloClass = Class.forName("com.fastcampus.ch2.Hello"); 
-		//Å¬·¡½º ¼³°èµµ¸¦ °¡Áö°í¿Â´Ù´Â °ÍÀÇ ÀÇ¹Ì -> ±¸¼ºÇÏ´Â °´Ã¼, ¸â¹öµéÀÇ Á¤º¸¸¦ ¸ğµÎ ¾Ë°ÔµÇ´Â °Í.
-		//µû¶ó¼­, À§ÀÇ Class °´Ã¼¸¦ ÅëÇØ ³»ºÎÀÇ °´Ã¼ ¶ÇÇÑ »ı¼ºÇÒ ¼ö ÀÖÀ½.
-		Hello hello = (Hello)helloClass.newInstance();  // Class °´Ã¼°¡ °¡Áø Á¤º¸·Î °´Ã¼ »ı¼º // newInstance()ÀÇ ¹İÈ¯Å¸ÀÔÀÌ object ÀÌ¹Ç·Î Çüº¯È¯ ÇÊ¿ä.
+		//í´ë˜ìŠ¤ ì„¤ê³„ë„ë¥¼ ê°€ì§€ê³ ì˜¨ë‹¤ëŠ” ê²ƒì˜ ì˜ë¯¸ -> êµ¬ì„±í•˜ëŠ” ê°ì²´, ë©¤ë²„ë“¤ì˜ ì •ë³´ë¥¼ ëª¨ë‘ ì•Œê²Œë˜ëŠ” ê²ƒ.
+		//ë”°ë¼ì„œ, ìœ„ì˜ Class ê°ì²´ë¥¼ í†µí•´ ë‚´ë¶€ì˜ ê°ì²´ ë˜í•œ ìƒì„±í•  ìˆ˜ ìˆìŒ.
+		Hello hello = (Hello)helloClass.newInstance();  // Class ê°ì²´ê°€ ê°€ì§„ ì •ë³´ë¡œ ê°ì²´ ìƒì„± // newInstance()ì˜ ë°˜í™˜íƒ€ì…ì´ object ì´ë¯€ë¡œ í˜•ë³€í™˜ í•„ìš”.
 		
-		//HelloÅ¬·¡½º°¡ °¡Áø main()¸Ş¼­µå (->private Á¦ÇÑÀÚ) °¡Á®¿À±â... getDeclaredMethod (reflectÆĞÅ°ÁöÀÇ method¸¦ ÂüÁ¶ÇÒ¶§»ç¿ëÇÏ´Â Å¬·¡½º)
+		//Helloí´ë˜ìŠ¤ê°€ ê°€ì§„ main()ë©”ì„œë“œ (->private ì œí•œì) ê°€ì ¸ì˜¤ê¸°... getDeclaredMethod (reflectíŒ¨í‚¤ì§€ì˜ methodë¥¼ ì°¸ì¡°í• ë•Œì‚¬ìš©í•˜ëŠ” í´ë˜ìŠ¤)
 		Method main = helloClass.getDeclaredMethod("main");
 		main.setAccessible(true);
 		main.invoke(hello); // == hello.main()

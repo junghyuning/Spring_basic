@@ -9,63 +9,63 @@ import java.util.Scanner;
 
 import org.springframework.ui.Model;
 import org.springframework.validation.support.BindingAwareModelMap;
-//### ReflectionAPI¸¦ È°¿ëÇÏ¿© Model »ı¼ºÇÏ±â
+//### ReflectionAPIë¥¼ í™œìš©í•˜ì—¬ Model ìƒì„±í•˜ê¸°
 public class MethodCall2 {
 	public static void main(String[] args) throws Exception{
-		//1. YoilTellerMVC °´Ã¼ »ı¼º
+		//1. YoilTellerMVC ê°ì²´ ìƒì„±
 		Class clazz = Class.forName("com.fastcampus.ch2.YoilTellerMVC");
 		Object obj = clazz.newInstance();
 		
-		//2. ¸ŞÀÎ¸Ş¼­µåÀÇ Á¤º¸¸¦ °¡Áö°í ¿È.
+		//2. ë©”ì¸ë©”ì„œë“œì˜ ì •ë³´ë¥¼ ê°€ì§€ê³  ì˜´.
 		Method main = clazz.getDeclaredMethod("main", int.class, int.class, int.class, Model.class);
 		
-		//3. Model »ı¼º : ¸ğµ¨ÀÇ ±¸ÇöÃ¼ÀÎ BindingAwareModelMap »ı¼º - ¹«¾ùÀÎÁö Áß¿äÇÏÁø ¾ÊÀ¸³ª »ı¼ºÇØ¾ß ÇÔ.
+		//3. Model ìƒì„± : ëª¨ë¸ì˜ êµ¬í˜„ì²´ì¸ BindingAwareModelMap ìƒì„± - ë¬´ì—‡ì¸ì§€ ì¤‘ìš”í•˜ì§„ ì•Šìœ¼ë‚˜ ìƒì„±í•´ì•¼ í•¨.
 		Model model = new BindingAwareModelMap();
 		System.out.println("[before] model="+model);
 		
-		//4.main ¸Ş¼­µå È£Ãâ
+		//4.main ë©”ì„œë“œ í˜¸ì¶œ
 		// String viewName = obj.main(2021, 10, 1, model);
 		String viewName = (String)main.invoke(obj, new Object[] { 2021, 10, 1, model }); 	
 		System.out.println("viewName="+viewName);	
 		
-		// ModelÀÇ ³»¿ëÀ» Ãâ·Â 
+		// Modelì˜ ë‚´ìš©ì„ ì¶œë ¥ 
 		System.out.println("[after] model="+model);
 				
-		// ÅØ½ºÆ® ÆÄÀÏÀ» ÀÌ¿ëÇÑ rendering
+		// í…ìŠ¤íŠ¸ íŒŒì¼ì„ ì´ìš©í•œ rendering
 		render(model, viewName);
 	} // main
 	
 	static void render(Model model, String viewName) throws IOException {
 		String result = "";
 		
-		// 1. ºäÀÇ ³»¿ëÀ» ÇÑÁÙ¾¿ ÀĞ¾î¼­ ÇÏ³ªÀÇ ¹®ÀÚ¿­·Î ¸¸µç´Ù.
+		// 1. ë·°ì˜ ë‚´ìš©ì„ í•œì¤„ì”© ì½ì–´ì„œ í•˜ë‚˜ì˜ ë¬¸ìì—´ë¡œ ë§Œë“ ë‹¤.
 		Scanner sc = new Scanner(new File("src/main/webapp/WEB-INF/views/"+viewName+".jsp"), "utf-8");
 		
 		while(sc.hasNextLine())
 			result += sc.nextLine()+ System.lineSeparator();
 		
-		// 2. modelÀ» mapÀ¸·Î º¯È¯ 
+		// 2. modelì„ mapìœ¼ë¡œ ë³€í™˜ 
 		Map map = model.asMap();
 		
-		// 3.key¸¦ ÇÏ³ª¾¿ ÀĞ¾î¼­ templateÀÇ ${key}¸¦ value¹Ù²Û´Ù.
+		// 3.keyë¥¼ í•˜ë‚˜ì”© ì½ì–´ì„œ templateì˜ ${key}ë¥¼ valueë°”ê¾¼ë‹¤.
 		Iterator it = map.keySet().iterator();
 		
 		while(it.hasNext()) {
 			String key = (String)it.next();
 
-			// 4. replace()·Î key¸¦ value Ä¡È¯ÇÑ´Ù.
+			// 4. replace()ë¡œ keyë¥¼ value ì¹˜í™˜í•œë‹¤.
 			result = result.replace("${"+key+"}", ""+map.get(key));
 		}
 		
-		// 5.·»´õ¸µ °á°ú¸¦ Ãâ·ÂÇÑ´Ù.
+		// 5.ë Œë”ë§ ê²°ê³¼ë¥¼ ì¶œë ¥í•œë‹¤.
 		System.out.println(result);
 	}
 }
 
-/* [½ÇÇà°á°ú] 
+/* [ì‹¤í–‰ê²°ê³¼] 
 [before] model={}
 viewName=yoil
-[after] model={year=2021, month=10, day=1, yoil=±İ}
+[after] model={year=2021, month=10, day=1, yoil=ê¸ˆ}
 <%@ page contentType="text/html;charset=utf-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
@@ -74,7 +74,7 @@ viewName=yoil
 	<title>YoilTellerMVC</title>
 </head>
 <body>
-<h1>2021³â 10¿ù 1ÀÏÀº ±İ¿äÀÏÀÔ´Ï´Ù.</h1>
+<h1>2021ë…„ 10ì›” 1ì¼ì€ ê¸ˆìš”ì¼ì…ë‹ˆë‹¤.</h1>
 </body>
 </html>
 

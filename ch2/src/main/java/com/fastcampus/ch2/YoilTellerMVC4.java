@@ -13,9 +13,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-//< Ch. 02 Spring MVC - 06. ¼³Á¤ ÆÄÀÏ - server.xml, web.xml > ¿¡¼­ Æ÷Æ® ¹øÈ£ 80À¸·Î ¼öÁ¤ -> url¿¡ Æ÷Æ®¹øÈ£ ÀÛ¼º ºÒÇÊ¿ä
-//¿¬¿ùÀÏ ÀÔ·Â -> ¿äÀÏÀ» ¾Ë·ÁÁÖ´Â ÇÁ·Î±×·¥
-//1. ÀÏ¿äÀÏ 2. ¿ù¿äÀÏ ...
+//< Ch. 02 Spring MVC - 06. ì„¤ì • íŒŒì¼ - server.xml, web.xml > ì—ì„œ í¬íŠ¸ ë²ˆí˜¸ 80ìœ¼ë¡œ ìˆ˜ì • -> urlì— í¬íŠ¸ë²ˆí˜¸ ì‘ì„± ë¶ˆí•„ìš”
+//ì—°ì›”ì¼ ì…ë ¥ -> ìš”ì¼ì„ ì•Œë ¤ì£¼ëŠ” í”„ë¡œê·¸ë¨
+//1. ì¼ìš”ì¼ 2. ì›”ìš”ì¼ ...
 @Controller
 public class YoilTellerMVC4 { //http://localhost/ch2/getYoilMVC?year=2021&month=10&day=1 
 	@ExceptionHandler
@@ -25,11 +25,11 @@ public class YoilTellerMVC4 { //http://localhost/ch2/getYoilMVC?year=2021&month=
 	}
 	
 	@RequestMapping("/getYoilMVC4")
-	//year,month,day -> MydateÅ¬·¡½º·Î Á¤ÀÇÇÏ¿© ÇÏ³ªÀÇ ¸Å°³º¯¼ö·Î »ç¿ë
+	//year,month,day -> Mydateí´ë˜ìŠ¤ë¡œ ì •ì˜í•˜ì—¬ í•˜ë‚˜ì˜ ë§¤ê°œë³€ìˆ˜ë¡œ ì‚¬ìš©
 	public static String main(MyDate date, Model model) throws IOException {
 		
 		
-		//ÇÊ¿äÇÑ ºÎºĞ 1. À¯È¿¼º°Ë»ç
+		//í•„ìš”í•œ ë¶€ë¶„ 1. ìœ íš¨ì„±ê²€ì‚¬
 		if(!isValid(date))
 			return "yoilError";
 		
@@ -39,9 +39,9 @@ public class YoilTellerMVC4 { //http://localhost/ch2/getYoilMVC?year=2021&month=
 		model.addAttribute("yoil", yoil);
 		
 
-		//MVC_3 ¸ğµ¨°´Ã¼¸¦ Àü´ŞÇÒ view ÁöÁ¤ 
-		//-> returnÀÇ ÀÚ·áÇüÀÌ String ÀÌ¹Ç·Î main¸Ş¼­µåÀÇ ¹İÈ¯ ÀÚ·áÇüÀÌ String ÀÌ µÅ¾ß ÇÔ
-		return "yoil"; // WEB-INF/views/yoil.jsp¸¦ ÀÌ¿ëÇÏ¿© °ªÀ» Ãâ·ÂÇÏ¶ó´Â ÀÇ¹Ì
+		//MVC_3 ëª¨ë¸ê°ì²´ë¥¼ ì „ë‹¬í•  view ì§€ì • 
+		//-> returnì˜ ìë£Œí˜•ì´ String ì´ë¯€ë¡œ mainë©”ì„œë“œì˜ ë°˜í™˜ ìë£Œí˜•ì´ String ì´ ë¼ì•¼ í•¨
+		return "yoil"; // WEB-INF/views/yoil.jspë¥¼ ì´ìš©í•˜ì—¬ ê°’ì„ ì¶œë ¥í•˜ë¼ëŠ” ì˜ë¯¸
 	}
 
 	
@@ -61,14 +61,14 @@ private static boolean isValid(int year, int month, int day) {
 }
 
 
-//block ÁöÁ¤ >> refactor >> extract Method >> ÇÁ¶óÀÌºø ¸Ş¼­µå·Î ºĞ¸® µÊ.
+//block ì§€ì • >> refactor >> extract Method >> í”„ë¼ì´ë¹— ë©”ì„œë“œë¡œ ë¶„ë¦¬ ë¨.
 private static char getYoil(int year, int month, int day) {
-	Calendar cal = Calendar.getInstance(); // ½Ì±ÛÅæ
-	cal.set(year, month - 1, day); // ºÒ·¯¿Ã Ä¶¸°´õ¿¡ ÀÔ·Â¹ŞÀº ¿¬¿ùÀÏ ¼³Á¤ (¿ùÀÌ 0ºÎÅÍ ½ÃÀÛ µû¶ó¼­ -1)
+	Calendar cal = Calendar.getInstance(); // ì‹±ê¸€í†¤
+	cal.set(year, month - 1, day); // ë¶ˆëŸ¬ì˜¬ ìº˜ë¦°ë”ì— ì…ë ¥ë°›ì€ ì—°ì›”ì¼ ì„¤ì • (ì›”ì´ 0ë¶€í„° ì‹œì‘ ë”°ë¼ì„œ -1)
 
-	int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK); // ¿¬¿ùÀÏÀ» ÀúÀåÇÑ Ä¶¸°´õ °´Ã¼¸¦ ÅëÇØ ¿äÀÏ ¹Ş¾Æ¿È
-	//¸®ÅÏÅ¸ÀÔ char·Î ¼³Á¤
-	return " ÀÏ¿ùÈ­¼ö¸ñ±İÅä".charAt(dayOfWeek); // ¿äÀÏÀÌ 1ºÎÅÍ ½ÃÀÛÇÏ¹Ç·Î 0ÀÚ¸®´Â °ø¹éÀ¸·Î ºñ¿öµÒ
+	int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK); // ì—°ì›”ì¼ì„ ì €ì¥í•œ ìº˜ë¦°ë” ê°ì²´ë¥¼ í†µí•´ ìš”ì¼ ë°›ì•„ì˜´
+	//ë¦¬í„´íƒ€ì… charë¡œ ì„¤ì •
+	return " ì¼ì›”í™”ìˆ˜ëª©ê¸ˆí† ".charAt(dayOfWeek); // ìš”ì¼ì´ 1ë¶€í„° ì‹œì‘í•˜ë¯€ë¡œ 0ìë¦¬ëŠ” ê³µë°±ìœ¼ë¡œ ë¹„ì›Œë‘ 
 }
 
 }

@@ -25,24 +25,24 @@ public class MethodCall3 {
 		Object obj  = clazz.newInstance();
 		
 		// YoilTellerMVC.main(int year, int month, int day, Model model)
-		//String viewName = (String)main.invoke(obj, new Object[] { 2021, 10, 1, model }); -> ÀÌ·¸°Ô ÇÏ´Â°ÍÀº ÇÏµåÄÚµù
-		//=> À§ÀÇ ½ÄÀ» ReflectionApi¸¦ ÀÌ¿ëÇÏ¿© È£Ãâ
-		Method main = clazz.getDeclaredMethod("main", int.class, int.class, int.class, Model.class); //model : °á°ú¸¦ Ãâ·ÂÇÏ´Âµ¥ ÇÊ¿äÇÑ ³»¿ëµéÀ» ÀúÀåÇÏ´Â °´Ã¼
+		//String viewName = (String)main.invoke(obj, new Object[] { 2021, 10, 1, model }); -> ì´ë ‡ê²Œ í•˜ëŠ”ê²ƒì€ í•˜ë“œì½”ë”©
+		//=> ìœ„ì˜ ì‹ì„ ReflectionApië¥¼ ì´ìš©í•˜ì—¬ í˜¸ì¶œ
+		Method main = clazz.getDeclaredMethod("main", int.class, int.class, int.class, Model.class); //model : ê²°ê³¼ë¥¼ ì¶œë ¥í•˜ëŠ”ë° í•„ìš”í•œ ë‚´ìš©ë“¤ì„ ì €ì¥í•˜ëŠ” ê°ì²´
 		Parameter[] paramArr = main.getParameters();
 		Object[] argArr = new Object[main.getParameterCount()];
 		
 		for(int i=0;i<paramArr.length;i++) {
 			String paramName = paramArr[i].getName();
 			Class  paramType = paramArr[i].getType();
-			Object value = map.get(paramName); // map¿¡¼­ ¸øÃ£À¸¸é value´Â null
+			Object value = map.get(paramName); // mapì—ì„œ ëª»ì°¾ìœ¼ë©´ valueëŠ” null
 
-			// paramTypeÁß¿¡ ModelÀÌ ÀÖÀ¸¸é, »ı¼º -> ÀúÀå 
+			// paramTypeì¤‘ì— Modelì´ ìˆìœ¼ë©´, ìƒì„± -> ì €ì¥ 
 			if(paramType==Model.class) {
 				argArr[i] = model = new BindingAwareModelMap(); 
-			} else if(value != null) {  // map¿¡ paramNameÀÌ ÀÖÀ¸¸é, (Áï, ¸Â´Â ÄÃ·³°ªÀÌ ÀÖ´Ù¸é)
-				//½ÇÁ¦ hashmapÀÇ data ÀÚ·áÇüÀº ¸ğµÎ String ÀÓ -> ÀÌ°ÍÀ» springÀÌ ÀÚµ¿º¯È¯ÇØÁÖ´Â ±â´É 
-				//=> year µ¥ÀÌÅÍÀÇ °æ¿ì intÇüÀ¸·Î º¯È¯
-				// value¿Í parameterÀÇ Å¸ÀÔÀ» ºñ±³ÇØ¼­, ´Ù¸£¸é º¯È¯ÇØ¼­ ÀúÀå  
+			} else if(value != null) {  // mapì— paramNameì´ ìˆìœ¼ë©´, (ì¦‰, ë§ëŠ” ì»¬ëŸ¼ê°’ì´ ìˆë‹¤ë©´)
+				//ì‹¤ì œ hashmapì˜ data ìë£Œí˜•ì€ ëª¨ë‘ String ì„ -> ì´ê²ƒì„ springì´ ìë™ë³€í™˜í•´ì£¼ëŠ” ê¸°ëŠ¥ 
+				//=> year ë°ì´í„°ì˜ ê²½ìš° intí˜•ìœ¼ë¡œ ë³€í™˜
+				// valueì™€ parameterì˜ íƒ€ì…ì„ ë¹„êµí•´ì„œ, ë‹¤ë¥´ë©´ ë³€í™˜í•´ì„œ ì €ì¥  
 				argArr[i] = convertTo(value, paramType);				
 			} 
 		}
@@ -50,22 +50,22 @@ public class MethodCall3 {
 		System.out.println("argArr="+Arrays.toString(argArr));
 		
 		
-		// ControllerÀÇ main()À» È£Ãâ - YoilTellerMVC.main(int year, int month, int day, Model model)
+		// Controllerì˜ main()ì„ í˜¸ì¶œ - YoilTellerMVC.main(int year, int month, int day, Model model)
 		String viewName = (String)main.invoke(obj, argArr); 	
 		System.out.println("viewName="+viewName);	
 		
-		// ModelÀÇ ³»¿ëÀ» Ãâ·Â 
+		// Modelì˜ ë‚´ìš©ì„ ì¶œë ¥ 
 		System.out.println("[after] model="+model);
 				
-		// ÅØ½ºÆ® ÆÄÀÏÀ» ÀÌ¿ëÇÑ rendering
+		// í…ìŠ¤íŠ¸ íŒŒì¼ì„ ì´ìš©í•œ rendering
 		render(model, viewName);			
 	} // main
 	
-	private static Object convertTo(Object value, Class type) { //(value -> type) º¯È¯ÇÏ´Â ¸Ş¼­µå
-		if(type==null || value==null || type.isInstance(value)) // Å¸ÀÔÀÌ °°À¸¸é ±×´ë·Î ¹İÈ¯ 
+	private static Object convertTo(Object value, Class type) { //(value -> type) ë³€í™˜í•˜ëŠ” ë©”ì„œë“œ
+		if(type==null || value==null || type.isInstance(value)) // íƒ€ì…ì´ ê°™ìœ¼ë©´ ê·¸ëŒ€ë¡œ ë°˜í™˜ 
 			return value;
 
-		// Å¸ÀÔÀÌ ´Ù¸£¸é, º¯È¯ÇØ¼­ ¹İÈ¯
+		// íƒ€ì…ì´ ë‹¤ë¥´ë©´, ë³€í™˜í•´ì„œ ë°˜í™˜
 		if(String.class.isInstance(value) && type==int.class) { // String -> int
 			return Integer.valueOf((String)value);
 		} else if(String.class.isInstance(value) && type==double.class) { // String -> double
@@ -78,35 +78,35 @@ public class MethodCall3 {
 	private static void render(Model model, String viewName) throws IOException {
 		String result = "";
 		
-		// 1. ºäÀÇ ³»¿ëÀ» ÇÑÁÙ¾¿ ÀĞ¾î¼­ ÇÏ³ªÀÇ ¹®ÀÚ¿­·Î ¸¸µç´Ù.
+		// 1. ë·°ì˜ ë‚´ìš©ì„ í•œì¤„ì”© ì½ì–´ì„œ í•˜ë‚˜ì˜ ë¬¸ìì—´ë¡œ ë§Œë“ ë‹¤.
 		Scanner sc = new Scanner(new File("src/main/webapp/WEB-INF/views/"+viewName+".jsp"), "utf-8");
 		
 		while(sc.hasNextLine())
 			result += sc.nextLine()+ System.lineSeparator();
 		
-		// 2. modelÀ» mapÀ¸·Î º¯È¯ 
+		// 2. modelì„ mapìœ¼ë¡œ ë³€í™˜ 
 		Map map = model.asMap();
 		
-		// 3.key¸¦ ÇÏ³ª¾¿ ÀĞ¾î¼­ templateÀÇ ${key}¸¦ value¹Ù²Û´Ù.
+		// 3.keyë¥¼ í•˜ë‚˜ì”© ì½ì–´ì„œ templateì˜ ${key}ë¥¼ valueë°”ê¾¼ë‹¤.
 		Iterator it = map.keySet().iterator();
 		
 		while(it.hasNext()) {
 			String key = (String)it.next();
 
-			// 4. replace()·Î key¸¦ value Ä¡È¯ÇÑ´Ù.
+			// 4. replace()ë¡œ keyë¥¼ value ì¹˜í™˜í•œë‹¤.
 			result = result.replace("${"+key+"}", ""+map.get(key));
 		}
 		
-		// 5.·»´õ¸µ °á°ú¸¦ Ãâ·ÂÇÑ´Ù.
+		// 5.ë Œë”ë§ ê²°ê³¼ë¥¼ ì¶œë ¥í•œë‹¤.
 		System.out.println(result);
 	}
 }
 
-/* [½ÇÇà°á°ú] 
+/* [ì‹¤í–‰ê²°ê³¼] 
 paramArr=[int year, int month, int day, org.springframework.ui.Model model]
 argArr=[2021, 10, 1, {}]
 viewName=yoil
-[after] model={year=2021, month=10, day=1, yoil=±İ}
+[after] model={year=2021, month=10, day=1, yoil=ê¸ˆ}
 <%@ page contentType="text/html;charset=utf-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
@@ -115,7 +115,7 @@ viewName=yoil
 	<title>YoilTellerMVC</title>
 </head>
 <body>
-<h1>2021³â 10¿ù 1ÀÏÀº ±İ¿äÀÏÀÔ´Ï´Ù.</h1>
+<h1>2021ë…„ 10ì›” 1ì¼ì€ ê¸ˆìš”ì¼ì…ë‹ˆë‹¤.</h1>
 </body>
 </html>
 */

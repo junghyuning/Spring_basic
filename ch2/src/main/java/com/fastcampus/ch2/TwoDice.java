@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller  //ctrl+shift+o : ÀÚµ¿ import
+@Controller  //ctrl+shift+o : ìë™ import
 public class TwoDice {
 	@RequestMapping("/rollDice")
 	public void main(HttpServletResponse response) throws IOException {
@@ -22,8 +22,8 @@ public class TwoDice {
 		out.println("<html>");
 		out.println("<head>");
 		out.println("<body>");
-		out.println("<img alt=\"ÁÖ»çÀ§"+idx1+"\" src='resources/img/dice"+idx1+".jpg'>");
-		out.println("<img alt=\"ÁÖ»çÀ§"+idx2+"\" src='resources/img/dice"+idx2+".jpg'>");
+		out.println("<img alt=\"ì£¼ì‚¬ìœ„"+idx1+"\" src='resources/img/dice"+idx1+".jpg'>");
+		out.println("<img alt=\"ì£¼ì‚¬ìœ„"+idx2+"\" src='resources/img/dice"+idx2+".jpg'>");
 		out.println("</body>");
 		out.println("</head>");
 		out.println("</html>");

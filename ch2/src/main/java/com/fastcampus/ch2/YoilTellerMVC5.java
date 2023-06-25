@@ -18,23 +18,23 @@ public class YoilTellerMVC5 {
 	}
 
 	@RequestMapping("/getYoilMVC5") // http://localhost/ch2/getYoilMVC5?year=2021&month=10&day=1
-//  public String main(@ModelAttribute("myDate") MyDate date, Model m) { // ¾Æ·¡¿Í µ¿ÀÏ 
-	public String main(@ModelAttribute MyDate date, Model m) { // @ModelAttribute»ç¿ë, ¹İÈ¯ Å¸ÀÔÀº String
+//  public String main(@ModelAttribute("myDate") MyDate date, Model m) { // ì•„ë˜ì™€ ë™ì¼ 
+	public String main(@ModelAttribute MyDate date, Model m) { // @ModelAttributeì‚¬ìš©, ë°˜í™˜ íƒ€ì…ì€ String
 		System.out.println("myDate=" + date);
 
-		// 1. À¯È¿¼º °Ë»ç
+		// 1. ìœ íš¨ì„± ê²€ì‚¬
 		if (!isValid(date))
 			return "yoilError";
 
-		// 2. Ã³¸®
+		// 2. ì²˜ë¦¬
 		char yoil = getYoil(date);
 
-		// 3. Model¿¡ ÀÛ¾÷ÇÑ °á°ú¸¦ ÀúÀå
-		// @ModelAttribute ´öºĞ¿¡ MyDate¸¦ ÀúÀå¾ÈÇØµµ µÊ. View·Î ÀÚµ¿ Àü´ŞµÊ.
+		// 3. Modelì— ì‘ì—…í•œ ê²°ê³¼ë¥¼ ì €ì¥
+		// @ModelAttribute ë•ë¶„ì— MyDateë¥¼ ì €ì¥ì•ˆí•´ë„ ë¨. Viewë¡œ ìë™ ì „ë‹¬ë¨.
 //      m.addAttribute("myDate", date);     	
 //      m.addAttribute("yoil", yoil);        
 
-		// 4. ÀÛ¾÷ °á°ú¸¦ º¸¿©ÁÙ ºäÀÇ ÀÌ¸§À» ¹İÈ¯
+		// 4. ì‘ì—… ê²°ê³¼ë¥¼ ë³´ì—¬ì¤„ ë·°ì˜ ì´ë¦„ì„ ë°˜í™˜
 		return "yoil";
 	}
 
@@ -47,7 +47,7 @@ public class YoilTellerMVC5 {
 		cal.set(year, month - 1, day);
 
 		int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
-		return " ÀÏ¿ùÈ­¼ö¸ñ±İÅä".charAt(dayOfWeek);
+		return " ì¼ì›”í™”ìˆ˜ëª©ê¸ˆí† ".charAt(dayOfWeek);
 	}
 
 	private boolean isValid(MyDate date) {
@@ -58,6 +58,6 @@ public class YoilTellerMVC5 {
 		if (year == -1 || month == -1 || day == -1)
 			return false;
 
-		return (1 <= month && month <= 12) && (1 <= day && day <= 31); // °£´ÜÈ÷ Ã¼Å©
+		return (1 <= month && month <= 12) && (1 <= day && day <= 31); // ê°„ë‹¨íˆ ì²´í¬
 	}
 }

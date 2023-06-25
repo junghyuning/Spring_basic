@@ -6,19 +6,19 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Scanner;
 import java.util.Set;
-//### ÄÁÆ®·Ñ·¯¸¦ Á÷Á¢ »ý¼ºÇÏ±â
+//### ì»¨íŠ¸ë¡¤ëŸ¬ë¥¼ ì§ì ‘ ìƒì„±í•˜ê¸°
 public class MethodCall {
 	public static void main(String[] args) throws Exception{
-		HashMap map = new HashMap();  //¸ÞÀÎ¸Þ¼­µå¿¡¼­ ¸Ê »ý¼ºÇÔ 
+		HashMap map = new HashMap();  //ë©”ì¸ë©”ì„œë“œì—ì„œ ë§µ ìƒì„±í•¨ 
 		System.out.println("before:"+map);
 		
 		
-		//### ÄÁÆ®·Ñ·¯¸¦ Á÷Á¢ »ý¼º ÈÄ È£Ãâ
+		//### ì»¨íŠ¸ë¡¤ëŸ¬ë¥¼ ì§ì ‘ ìƒì„± í›„ í˜¸ì¶œ
 		ModelController mc = new ModelController();  
-		String viewName = mc.main(map); //ÄÁÆ®·Ñ·¯ »ý¼º ÈÄ, map È£Ãâ(¸Å°³º¯¼ö·Î ³Ñ°Ü ÁÜ) -> view ÀÌ¸§ ¹ÝÈ¯
-		//(Áï, ÄÁÆ®·Ñ·¯´Â map°ü·Ã Á¤º¸¸¦ main¿¡ ÁÙ ÇÊ¿ä ¾øÀ½(¾ÖÃÊ¿¡ main¸Þ¼­µå°¡ °¡Áö°íÀÖ´Â Á¤º¸ÀÓ)
+		String viewName = mc.main(map); //ì»¨íŠ¸ë¡¤ëŸ¬ ìƒì„± í›„, map í˜¸ì¶œ(ë§¤ê°œë³€ìˆ˜ë¡œ ë„˜ê²¨ ì¤Œ) -> view ì´ë¦„ ë°˜í™˜
+		//(ì¦‰, ì»¨íŠ¸ë¡¤ëŸ¬ëŠ” mapê´€ë ¨ ì •ë³´ë¥¼ mainì— ì¤„ í•„ìš” ì—†ìŒ(ì• ì´ˆì— mainë©”ì„œë“œê°€ ê°€ì§€ê³ ìžˆëŠ” ì •ë³´ìž„)
 		
-		System.out.println("after :"+map); //mapÀÇ Á¤º¸(data)
+		System.out.println("after :"+map); //mapì˜ ì •ë³´(data)
 		
 		render(map, viewName); 
 	}
@@ -26,35 +26,35 @@ public class MethodCall {
 	static void render(HashMap map, String viewName) throws IOException {
 		String result = "";
 		
-		// 1. ºäÀÇ ³»¿ëÀ» ÇÑÁÙ¾¿ ÀÐ¾î¼­ ÇÏ³ªÀÇ ¹®ÀÚ¿­·Î ¸¸µç´Ù.
+		// 1. ë·°ì˜ ë‚´ìš©ì„ í•œì¤„ì”© ì½ì–´ì„œ í•˜ë‚˜ì˜ ë¬¸ìžì—´ë¡œ ë§Œë“ ë‹¤.
 		Scanner sc = new Scanner(new File(viewName+".txt"));
 		
 		while(sc.hasNextLine())
 			result += sc.nextLine()+ System.lineSeparator();
 		
-		// 2. map¿¡ ´ã±ä key¸¦ ÇÏ³ª¾¿ ÀÐ¾î¼­ templateÀÇ ${key}¸¦ value¹Ù²Û´Ù.
+		// 2. mapì— ë‹´ê¸´ keyë¥¼ í•˜ë‚˜ì”© ì½ì–´ì„œ templateì˜ ${key}ë¥¼ valueë°”ê¾¼ë‹¤.
 		Iterator it = map.keySet().iterator();
 		
 		while(it.hasNext()) {
 			String key = (String)it.next();
 
-			// 3. replace()·Î key¸¦ value Ä¡È¯ÇÑ´Ù.
+			// 3. replace()ë¡œ keyë¥¼ value ì¹˜í™˜í•œë‹¤.
 			result = result.replace("${"+key+"}", (String)map.get(key));
 		}
 		
-		// 4.·»´õ¸µ °á°ú¸¦ Ãâ·ÂÇÑ´Ù.
+		// 4.ë Œë”ë§ ê²°ê³¼ë¥¼ ì¶œë ¥í•œë‹¤.
 		System.out.println(result);
 	}
 }
 
-class ModelController { //ÁøÂ¥ ÄÁÆ®·Ñ·¯´Â ¾Æ´Ô
-	public String main(HashMap map) { // ¸Å°³º¯¼ö·Î map À» ¼³Á¤
-		//ÀÛ¾÷°á°ú¸¦ map¿¡ ÀúÀå
+class ModelController { //ì§„ì§œ ì»¨íŠ¸ë¡¤ëŸ¬ëŠ” ì•„ë‹˜
+	public String main(HashMap map) { // ë§¤ê°œë³€ìˆ˜ë¡œ map ì„ ì„¤ì •
+		//ìž‘ì—…ê²°ê³¼ë¥¼ mapì— ì €ìž¥
 		map.put("id", "asdf");
 		map.put("pwd", "1111");
 		
-		return "txtView2"; //ºä ÀÌ¸§ ¹ÝÈ¯ 
-		//=> view¸¦ ¿©·¯°³ »ý¼ºÇØ µÎ°í ¹ÝÈ¯ Å¸ÀÔ¸¸ º¯°æ½Ã, ÇØ´ç view¿¡ ¸Â´Â Çü½ÄÀ¸·Î Ãâ·Â µÊ
+		return "txtView2"; //ë·° ì´ë¦„ ë°˜í™˜ 
+		//=> viewë¥¼ ì—¬ëŸ¬ê°œ ìƒì„±í•´ ë‘ê³  ë°˜í™˜ íƒ€ìž…ë§Œ ë³€ê²½ì‹œ, í•´ë‹¹ viewì— ë§žëŠ” í˜•ì‹ìœ¼ë¡œ ì¶œë ¥ ë¨
 	}
 }
 
@@ -65,7 +65,7 @@ class ModelController { //ÁøÂ¥ ÄÁÆ®·Ñ·¯´Â ¾Æ´Ô
  * 
  * 
  * 
- * [½ÇÇà°á°ú] 
+ * [ì‹¤í–‰ê²°ê³¼] 
  * =>txtView1.txt
  * before:{} 
  * after :{id=asdf, pwd=1111} 

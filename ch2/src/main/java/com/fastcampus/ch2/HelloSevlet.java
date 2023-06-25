@@ -8,30 +8,30 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-//¼­ºí¸´Àº ±âº»ÀûÀ¸·Î ½Ì±ÛÅæÀÌ¹Ç·Î 1°³ÀÇ °´Ã¼¸¸ »ı¼ºµÇ°í 1°³ÀÇ ÀÎ½ºÅÏ½º°¡ ¹«ÇÑÈ÷ ÀçÈ°¿ëµÇ´Â ÇüÅÂ
-//=> ÃÖÃÊ 1È¸¸¸ °´Ã¼ »ı¼º ¹× ÃÊ±âÈ­(init) -> ±× ÀÌÈÄ¿¡´Â °è¼Ó ÀçÈ°¿ëÇÏ¿© ¼­ºñ½º È£Ãâ
+//ì„œë¸”ë¦¿ì€ ê¸°ë³¸ì ìœ¼ë¡œ ì‹±ê¸€í†¤ì´ë¯€ë¡œ 1ê°œì˜ ê°ì²´ë§Œ ìƒì„±ë˜ê³  1ê°œì˜ ì¸ìŠ¤í„´ìŠ¤ê°€ ë¬´í•œíˆ ì¬í™œìš©ë˜ëŠ” í˜•íƒœ
+//=> ìµœì´ˆ 1íšŒë§Œ ê°ì²´ ìƒì„± ë° ì´ˆê¸°í™”(init) -> ê·¸ ì´í›„ì—ëŠ” ê³„ì† ì¬í™œìš©í•˜ì—¬ ì„œë¹„ìŠ¤ í˜¸ì¶œ
 
 @WebServlet("/hello")
 public class HelloSevlet extends HttpServlet{
 	
-	// ¿À¹ö¶óÀÌµù ¸Ş¼­µåµé ÀÚµ¿»ı¼º ¹æ¹ı >> menubar >> source >> override/implements methods >> ÇØ´ç ¸Ş¼­µåµé check
+	// ì˜¤ë²„ë¼ì´ë”© ë©”ì„œë“œë“¤ ìë™ìƒì„± ë°©ë²• >> menubar >> source >> override/implements methods >> í•´ë‹¹ ë©”ì„œë“œë“¤ check
 	@Override
 	public void init() throws ServletException {
-		//1. ¼­ºí¸´ÀÇ ÃÊ±âÈ­ ÀÛ¾÷ ´ã´ç
+		//1. ì„œë¸”ë¦¿ì˜ ì´ˆê¸°í™” ì‘ì—… ë‹´ë‹¹
 		System.out.println("[HelloSevlet] init() is called");
 	}
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		//1. ÀÔ·Â > 2. Ã³¸® > 3. Ãâ·Â\
+		//1. ì…ë ¥ > 2. ì²˜ë¦¬ > 3. ì¶œë ¥\
 		System.out.println("[HelloSevlet] service() is called");
 		
 	}
 
 	@Override
 	public void destroy() {
-		//¼­ºí¸´ unload : ¼­ºí¸´ÀÌ ¸Ş¸ğ¸®¿¡¼­ Á¦°ÅµÉ ¶§ ÄÁÅ×ÀÌ³Ê¿¡ ÀÇÇØ¼­ ÀÚµ¿ È£ÃâµÊ
+		//ì„œë¸”ë¦¿ unload : ì„œë¸”ë¦¿ì´ ë©”ëª¨ë¦¬ì—ì„œ ì œê±°ë  ë•Œ ì»¨í…Œì´ë„ˆì— ì˜í•´ì„œ ìë™ í˜¸ì¶œë¨
 		System.out.println("[HelloSevlet] distroy() is called");
 	}
 }

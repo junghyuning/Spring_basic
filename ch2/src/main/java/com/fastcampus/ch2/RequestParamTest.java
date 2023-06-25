@@ -28,7 +28,7 @@ public class RequestParamTest {
 	}
 
 	@RequestMapping("/requestParam2")
-//	public String main2(@RequestParam(name="year", required=false) String year) {   // �븘�옒�� �룞�씪 
+//	public String main2(@RequestParam(name="year", required=false) String year) {   //  븘 옒    룞 씪 
 	public String main2(String year) {   
 //		http://localhost/ch2/requestParam2         ---->> year=null
 //		http://localhost/ch2/requestParam2?year    ---->> year=""
@@ -37,9 +37,9 @@ public class RequestParamTest {
 	}
 
 	@RequestMapping("/requestParam3")
-//		public String main3(@RequestParam(name="year", required=true) String year) {   // �븘�옒�� �룞�씪 
+//		public String main3(@RequestParam(name="year", required=true) String year) {   //  븘 옒    룞 씪 
 		public String main3(@RequestParam String year) {   
-//		http://localhost/ch2/requestParam3         ---->> year=null   400 Bad Request. required=true�씪�꽌 
+//		http://localhost/ch2/requestParam3         ---->> year=null   400 Bad Request. required=true 씪 꽌 
 //		http://localhost/ch2/requestParam3?year    ---->> year=""
 		System.out.printf("[%s]year=[%s]%n", new Date(), year);
 		return "yoil";	

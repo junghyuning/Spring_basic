@@ -7,21 +7,21 @@ import java.util.StringJoiner;
 public class MethodInfo {
 	public static void main(String[] args) throws Exception{
 		
-		//1.YoilTeller Å¬·¡½ºÀÇ °´Ã¼¸¦ »ý¼º
+		//1.YoilTeller í´ëž˜ìŠ¤ì˜ ê°ì²´ë¥¼ ìƒì„±
 		Class clazz = Class.forName("com.fastcampus.ch2.YoilTellerMVC");
 		Object obj = clazz.newInstance();
 		
-		//2. ¸ðµç ¸Þ¼­µåÀÇ Á¤º¸¸¦ °¡Á®¿Í ¹è¿­¿¡ ÀúÀå
+		//2. ëª¨ë“  ë©”ì„œë“œì˜ ì •ë³´ë¥¼ ê°€ì ¸ì™€ ë°°ì—´ì— ì €ìž¥
 		Method[] methodArr = clazz.getDeclaredMethods();
 		
 		for(Method m : methodArr) {
-			String name = m.getName(); // ¸Þ¼­µåÀÇ ÀÌ¸§
-			Parameter[] paramArr = m.getParameters(); // ¸Å°³º¯¼ö ¸ñ·Ï
+			String name = m.getName(); // ë©”ì„œë“œì˜ ì´ë¦„
+			Parameter[] paramArr = m.getParameters(); // ë§¤ê°œë³€ìˆ˜ ëª©ë¡
 //			Class[] paramTypeArr = m.getParameterTypes();
-			Class returnType = m.getReturnType(); //¹ÝÈ¯Å¸ÀÔ
+			Class returnType = m.getReturnType(); //ë°˜í™˜íƒ€ìž…
 			
-			//"," : ±¸ºÐÀÚ / "(" : Á¢µÎ»ç / ")" : Á¢¹Ì»ç
-			//¸Þ¼­µå ¸Å°³º¯¼ö ¸ñ·ÏÀ» Á¢µÎ»ç Á¢¹Ì»ç·Î °¨½Î°í ±¸ºÐÀÚ·Î ±¸ºÐÇÏ¿© ¸Å°³º¯¼ö¸¦ Ãâ·Â 
+			//"," : êµ¬ë¶„ìž / "(" : ì ‘ë‘ì‚¬ / ")" : ì ‘ë¯¸ì‚¬
+			//ë©”ì„œë“œ ë§¤ê°œë³€ìˆ˜ ëª©ë¡ì„ ì ‘ë‘ì‚¬ ì ‘ë¯¸ì‚¬ë¡œ ê°ì‹¸ê³  êµ¬ë¶„ìžë¡œ êµ¬ë¶„í•˜ì—¬ ë§¤ê°œë³€ìˆ˜ë¥¼ ì¶œë ¥ 
 			StringJoiner paramList = new StringJoiner(", ", "(", ")");
 			
 			for(Parameter param : paramArr) {
@@ -36,20 +36,20 @@ public class MethodInfo {
 	} // main
 }
 
-/* [½ÇÇà°á°ú] Run on JavaApplication
+/* [ì‹¤í–‰ê²°ê³¼] Run on JavaApplication
 void main(javax.servlet.http.HttpServletRequest arg0, javax.servlet.http.HttpServletResponse arg1) 
-->  ¸Å°³º¯¼ö ÀÌ¸§ : arg0 / arg1
--> ½ÇÁ¦ YoilTeller Å¬·¡½º¸¦ º¸¸é ¸Å°³º¯¼öÀÇ ÀÌ¸§Àº request¿Í response ÀÓ
-=> why? arg0,arg1·Î ÀúÀåµÆÀ»±î? ÄÄÆÄÀÏ·¯¿¡°Ô ¸Å°³º¯¼öÀÇ ÀÌ¸§Àº Áß¿äÇÑ Á¤º¸°¡ ¾Æ´Ô µû¶ó¼­ ¸Å°³º¯¼öÀÇ ÀÌ¸§À» µû·Î ÀúÀåÇÏÁö´Â ¾ÊÀ½
--> µû¶ó¼­ ÄÄÆÄÀÏÇÑ ÈÄ ¸Å°³º¯¼öÀÇ ÀÌ¸§À» ¿ä«ŠÇÒ½Ã ¹è¿­°ªÀ¸·Î ¹ÝÈ¯ÇÔ
-1. if ¸Å°³º¯¼ö¸íÀÌ ²À ÇÊ¿äÇÏ´Ù¸é?  ÄÄÆÄÀÏ ¿É¼Ç¿¡ javac -parameters : ¸Å°³º¯¼ö ÀÌ¸§ ÀúÀå¿É¼Ç ¼³Á¤ÇØ¾ßÇÔ
+->  ë§¤ê°œë³€ìˆ˜ ì´ë¦„ : arg0 / arg1
+-> ì‹¤ì œ YoilTeller í´ëž˜ìŠ¤ë¥¼ ë³´ë©´ ë§¤ê°œë³€ìˆ˜ì˜ ì´ë¦„ì€ requestì™€ response ìž„
+=> why? arg0,arg1ë¡œ ì €ìž¥ëì„ê¹Œ? ì»´íŒŒì¼ëŸ¬ì—ê²Œ ë§¤ê°œë³€ìˆ˜ì˜ ì´ë¦„ì€ ì¤‘ìš”í•œ ì •ë³´ê°€ ì•„ë‹˜ ë”°ë¼ì„œ ë§¤ê°œë³€ìˆ˜ì˜ ì´ë¦„ì„ ë”°ë¡œ ì €ìž¥í•˜ì§€ëŠ” ì•ŠìŒ
+-> ë”°ë¼ì„œ ì»´íŒŒì¼í•œ í›„ ë§¤ê°œë³€ìˆ˜ì˜ ì´ë¦„ì„ ìš”ì³¥í• ì‹œ ë°°ì—´ê°’ìœ¼ë¡œ ë°˜í™˜í•¨
+1. if ë§¤ê°œë³€ìˆ˜ëª…ì´ ê¼­ í•„ìš”í•˜ë‹¤ë©´?  ì»´íŒŒì¼ ì˜µì…˜ì— javac -parameters : ë§¤ê°œë³€ìˆ˜ ì´ë¦„ ì €ìž¥ì˜µì…˜ ì„¤ì •í•´ì•¼í•¨
 windows >> preferences >> compiler >> java >> compiler >> store information about method parameters
-2. java version ¼³Á¤
-3. ÇÁ·ÎÁ§Æ® ¾÷µ¥ÀÌÆ®
-=> ½ÇÇà°á°ú void main(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response)
+2. java version ì„¤ì •
+3. í”„ë¡œì íŠ¸ ì—…ë°ì´íŠ¸
+=> ì‹¤í–‰ê²°ê³¼ void main(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response)
 
 
-# YoilTellerMVC·Î ½ÇÇàÇÑ °á°ú
+# YoilTellerMVCë¡œ ì‹¤í–‰í•œ ê²°ê³¼
 java.lang.String main(java.lang.String year, java.lang.String month, java.lang.String day, org.springframework.ui.Model model)
 boolean isValid(int year, int month, int day)
 */

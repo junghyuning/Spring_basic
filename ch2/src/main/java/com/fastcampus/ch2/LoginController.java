@@ -23,28 +23,28 @@ public class LoginController {
 	public String login(String id, String pwd, boolean rememberId, HttpServletResponse response) throws Exception{
 		System.out.println("id = "+ id);
 		System.out.println("pwd = "+ pwd);
-		// check¹Ú½º Ã¼Å© ½Ã, String rememberedId = on ¹İÈ¯. 
-		// rememberedIdÀÚ·áÇüÀ» booleanÀ¸·Î º¯°æ ½Ã T/F¹İÈ¯
+		// checkë°•ìŠ¤ ì²´í¬ ì‹œ, String rememberedId = on ë°˜í™˜. 
+		// rememberedIdìë£Œí˜•ì„ booleanìœ¼ë¡œ ë³€ê²½ ì‹œ T/Fë°˜í™˜
 		System.out.println("rememberId = "+ rememberId); 
-		//1. id¿Í pw È®ÀÎ
+		//1. idì™€ pw í™•ì¸
 		if(!(loginCheck(id,pwd))) {
-			String msg= URLEncoder.encode("id ¶Ç´Â pwd°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.","utf-8");
-			//2. id,pw ºÒÀÏÄ¡½Ã, loginFormÀ¸·Î ÀÌµ¿(+ ¿À·ù¸Ş¼¼Áö Ãâ·Â)
+			String msg= URLEncoder.encode("id ë˜ëŠ” pwdê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.","utf-8");
+			//2. id,pw ë¶ˆì¼ì¹˜ì‹œ, loginFormìœ¼ë¡œ ì´ë™(+ ì˜¤ë¥˜ë©”ì„¸ì§€ ì¶œë ¥)
 			return "redirect:/login/login?msg="+msg ;
 		}
 		
-		//2-1. id, pw ÀÏÄ¡ ½Ã, È¨À¸·Î ÀÌµ¿
+		//2-1. id, pw ì¼ì¹˜ ì‹œ, í™ˆìœ¼ë¡œ ì´ë™
 		if(rememberId) {
-			//1) ÄíÅ°»ı¼º
+			//1) ì¿ í‚¤ìƒì„±
 			Cookie cookie = new Cookie("id", id);
-			//2) ÀÀ´ä¿¡ ÀúÀå
+			//2) ì‘ë‹µì— ì €ì¥
 			response.addCookie(cookie);			
 		} else {
 			Cookie cookie = new Cookie("id", id);
 			cookie.setMaxAge(0);
 			response.addCookie(cookie);
 		}
-			//3) È¨À¸·Î ÀÌµ¿
+			//3) í™ˆìœ¼ë¡œ ì´ë™
 		return "redirect:/";
 	}
 	
